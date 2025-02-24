@@ -1,5 +1,5 @@
 $hostsPath = "C:\Windows\System32\drivers\etc\hosts"
-$listUrl = "https://raw.githubusercontent.com/DivineSoftware/AdobeFirewallBlocker/master/hosts.txt"
+$listUrl = "https://raw.githubusercontent.com/Ruddernation-Designs/Adobe-URL-Block-List/refs/heads/master/hosts"
 
 function AddToHosts {
     param ($hostsPath, $domains)
