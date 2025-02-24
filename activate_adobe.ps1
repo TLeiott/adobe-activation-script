@@ -1,5 +1,5 @@
 $hostsPath = "C:\Windows\System32\drivers\etc\hosts"
-$listUrl = "https://raw.githubusercontent.com/Ruddernation-Designs/Adobe-URL-Block-List/master/hosts.txt"
+$listUrl = "https://raw.githubusercontent.com/DivineSoftware/AdobeFirewallBlocker/master/hosts.txt"
 
 function AddToHosts {
     param ($hostsPath, $domains)
@@ -26,7 +26,10 @@ if (-not $isAdmin) {
     exit 1
 }
 
-$domainsToBlock = (New-object System.net.webclient).DownloadString($listUrl).Split([System.Environment]::Newline)
-AddToHosts -hostsPath $hostsPath -domains $domainsToBlock
-
-Write-Host "Hosts-Datei erfolgreich aktualisiert."
+try {
+    $domainsToBlock = (New-object System.net.webclient).DownloadString($listUrl).Split([System.Environment]::Newline)
+    AddToHosts -hostsPath $hostsPath -domains $domainsToBlock
+    Write-Host "Hosts-Datei erfolgreich aktualisiert."
+} catch {
+    Write-Error "Fehler beim Herunterladen der Domänenliste: $_"
+}
